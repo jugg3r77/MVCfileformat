@@ -5,9 +5,9 @@
  */
 package PlacementFormatter.Model;
 
-import java.io.File;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class PlacementFileTest {
     }
     
     @Before
-    public void setUp() {
+    public void setUp() {      
     }
     
     @After
@@ -45,12 +45,13 @@ public class PlacementFileTest {
     @Test
     public void testGetClient() {
         System.out.println("getClient");
-        PlacementFile instance = new PlacementFile();
-        String expResult = "";
+        String testPath = "/Users/nevarezfamily/Documents/placement_125_20160326_TEST.xlsx";
+        String testClient = "Crown";
+        PlacementFile instance = new PlacementFile(testPath,testClient);
+        String expResult = "Crown";
         String result = instance.getClient();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+ 
     }
 
 
@@ -60,11 +61,11 @@ public class PlacementFileTest {
     @Test
     public void testSetClient() {
         System.out.println("setClient");
-        String client = "";
+        String client = "Cavalry";
         PlacementFile instance = new PlacementFile();
         instance.setClient(client);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(instance.getClient(),client);
+  
     }
 
     /**
@@ -73,12 +74,10 @@ public class PlacementFileTest {
     @Test
     public void testHashCode() {
         System.out.println("hashCode");
-        PlacementFile instance = new PlacementFile();
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        PlacementFile instance2 = new PlacementFile("/test/pathway","Crown");
+        PlacementFile instance1 = new PlacementFile("/test/pathway","Crown");
+        Assert.assertTrue(instance1.equals(instance2) && instance2.equals(instance1));
+        Assert.assertTrue(instance1.hashCode()== instance2.hashCode());
     }
 
     /**
@@ -87,13 +86,13 @@ public class PlacementFileTest {
     @Test
     public void testEquals() {
         System.out.println("equals");
-        Object obj = null;
+        Object obj = new PlacementFile("/test/pathway","Crown");
         PlacementFile instance = new PlacementFile();
-        boolean expResult = false;
+        instance.setClient("Crown");
+        instance.setFilepath("/test/pathway");       
+        boolean expResult = true;
         boolean result = instance.equals(obj);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -102,12 +101,13 @@ public class PlacementFileTest {
     @Test
     public void testToString() {
         System.out.println("toString");
-        PlacementFile instance = new PlacementFile();
-        String expResult = "";
-        String result = instance.toString();
+        PlacementFile instance1 = new PlacementFile("/test/pathway","Crown");
+        String expResult = instance1.toString();
+        PlacementFile instance2 = new PlacementFile();
+        instance2.setClient("Crown");
+        instance2.setFilepath("/test/pathway");
+        String result = instance2.toString();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
   
@@ -117,12 +117,12 @@ public class PlacementFileTest {
     @Test
     public void testGetFilepath() {
         System.out.println("getFilepath");
-        PlacementFile instance = new PlacementFile();
-        String expResult = "";
+        String testPath = "/Users/nevarezfamily/Documents/placement_125_20160326_TEST.xlsx";
+        String testClient = "Crown";
+        PlacementFile instance = new PlacementFile(testPath,testClient);
+        String expResult = "/Users/nevarezfamily/Documents/placement_125_20160326_TEST.xlsx";
         String result = instance.getFilepath();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -131,11 +131,11 @@ public class PlacementFileTest {
     @Test
     public void testSetFilepath() {
         System.out.println("setFilepath");
-        String filepath = "";
+        String filepath = "/tes/nevarezfamily/test.xlsx";
         PlacementFile instance = new PlacementFile();
         instance.setFilepath(filepath);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.setClient("Crown");
+        assertEquals(instance.getFilepath(),filepath);
     }
     
 }
